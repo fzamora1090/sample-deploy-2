@@ -1,6 +1,6 @@
 bcrypt==3.1.7
 cffi==1.13.0
-Django==1.10
+Django==1.11.23
 pycparser==2.19
 PyMsgBox==1.0.7
 pytz==2019.3
