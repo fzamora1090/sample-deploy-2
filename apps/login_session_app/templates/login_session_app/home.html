@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <P>HOME PAGE</P>
+    <form action="/shirts/create" method='post'>
+        {%csrf_token%}
+        <p> Size: <input type="text" name='size'></p>
+        <p> Color: <input type="text" name='color'></p>
+        <p> Material: <input type="text" name='material'></p>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    {{ all_shirts }}
+    {% for shirt in all_shirts %}
+        <p>
+            Size: {{shirt.size }}, COlor: {{ shirt.color }}, Material: {{ shirt.material }}, Created By: {{ shirt.created_by.email }}
+        </p>
+    {% endfor %}
+    <a href="/logout">LOGOUT</a>
+</body>
+</html>

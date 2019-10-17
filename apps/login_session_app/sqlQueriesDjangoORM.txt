@@ -1,0 +1,82 @@
+Make the new Class in models.py
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py shell
+------ACTIVATE PYTHON shell and import new class from models
+from apps.login_session_app.models import Users
+
+-----------------Create Users
+Francisco = Users.objects.create(first_name="Francisco", last_name="Zamora", email_address="fz@gmail.com", age=22)
+
+all_Users = Users.objects.all()
+-----------------------------------Print al users by "first_name"
+>>> for u in all_Users:
+...    print(u.first_name)
+---------------------------------First Object
+>>> first_user = Users.objects.first()
+>>> print(first_user.first_name)
+Francisco
+----------------------------------Last Object
+>>> last_user = Users.objects.last()
+>>> print(last_user.first_name)
+Tyler
+----------------------------------Get object by id
+>>> second_user = Users.objects.get(id=1)
+>>> print(second_user.first_name)
+Francisco
+>>> second_user = Users.objects.get(id=2)
+>>> print(second_user.first_name)
+Gabriella
+>>> third_user = Users.objects.get(id=3)
+>>> print(third_user.first_name)
+Cris
+-------------------------------------Saving an update
+>>> third_user.first_name = "Pancakes"
+>>> third_user.save()
+>>> print(third_user.first_name)
+Pancakes
+----------------------------------------Deleting Users!
+>>> user_to_delete = User.objects.get(id=2)
+>>> user_to_delete.delete()
+(1, {'login_session_app.User': 1})
+
+------------------------------------------sort by first name
+users_first_names = Users.objects.all().order_by('first_name')
+
+>>> print(users_first_names.values("first_name"))
+
+>>> print(users_first_names.values("first_name"))
+--------------------------Get all users sorted  by first name in desc order
+>>> from django.db.models.functions import Lower
+>>> users_sorted_by_desc = Users.objects.order_by(Lower('first_name').desc())
+>>> print(users_sorted_by_desc.values('first_name'))
+
+
+
+this_book = Book.objects.get(id=4)	# retrieve an instance of a book
+this_publisher = Publisher.objects.get(id=2)	# retrieve an instance of a publisher
+   -----------------------------------------------------
+
+
+# 2 options that do the same thing:
+this_publisher.books.add(this_book)		# add the book to this publisher's list of books
+# OR
+this_book.publishers.add(this_publisher)	# add the publisher to this book's list of publishers
+
+-----------------------------------------------------------
+
+
+this_book = Book.objects.get(id=4)	# retrieve an instance of a book
+this_publisher = Publisher.objects.get(id=2)	# retrieve an instance of a publisher
+    
+# 2 options that do the same thing:
+this_publisher.books.remove(this_book)		# remove the book from this publisher's list of books
+# OR
+this_book.publishers.remove(this_publisher)	# remove the publisher from this book's list of publishers
+
+
+this_publisher.books.all()	# get all the books this publisher is publishing
+this_book.publishers.all()	# get all the publishers for this book
