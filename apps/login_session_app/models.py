@@ -5,6 +5,20 @@ import bcrypt
 # models for class creation -- always makemigrations and migrate anytime we change models.py
 
 # django auto mak                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             es ids and auto incrementing
+class UserManager(models.Manager):
+    def validator(self, postData):
+        errors = {}
+
+        if len(postData['first_name']) < 2:
+                errors['first_name'] = 'Your first name is too short'
+
+        if len(postData['last_name']) < 2:
+                errors['last_name'] = 'Your first name is too short'
+        
+        if len(postData['email']) < 2:
+                errors['email'] = 'Your first name is too short'
+        
+
 
 
 class User(models.Model):
@@ -41,20 +55,6 @@ class Users(models.Model):
 
     objects = UserManager()
 
-
-class UserManager(models.Manager):
-    def validator(self, postData):
-        errors = {}
-
-        if len(postData['first_name']) < 2:
-                errors['first_name'] = 'Your first name is too short'
-
-        if len(postData['last_name']) < 2:
-                errors['last_name'] = 'Your first name is too short'
-        
-        if len(postData['email']) < 2:
-                errors['email'] = 'Your first name is too short'
-        
 
 
 class Shirt(models.Model):
